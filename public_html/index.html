@@ -28,7 +28,7 @@
         <div class="jumbotron">
             <div class="container">
                 <h1>Bem-vindo ao Jogo da Velha</h1>
-                <p>Quem começa jagando ?</p>
+                <p>Quem começa Jogando ?</p>
                 <form action="">
                     <label for="rbx" class="label radio-text">X</label>
                     <input id="rbx" onclick="changeValue()" name="teste" class="radio-inline input" type="radio" checked/>
@@ -60,27 +60,81 @@
                 </tbody>
             </table>
             <script>
+
+                var p00 = "";
+                var p01 = "";
+                var p02 = "";
+                var p10 = "";
+                var p11 = "";
+                var p12 = "";
+                var p20 = "";
+                var p21 = "";
+                var p22 = "";
+
+                var letra = "";
+
+
                 function stop() { }
 
-                var radio = document.getElementById("rbx");
-                var init = radio.value == 'on';
-
+                var init = document.getElementById('rbx').checked;
                 function changeValue() {
-                    radio = document.getElementById("rbx");
-                    init = radio.value == 'on';
+                    location.reload();
                 }
 
                 function teste(p) {
                     if (init) {
                         document.getElementById(p).innerHTML = "X";
+                        letra = "X";
                         document.getElementById(p).onclick = stop();
                         init = !init;
                     } else {
                         document.getElementById(p).innerHTML = "O";
+                        letra = "O";
                         document.getElementById(p).onclick = stop();
                         init = !init;
                     }
+                    getValue();
+                    validaPosition();
                 }
+
+                function validaPosition() {
+                    if (p00 + p01 + p02 == 'XXX' || p00 + p01 + p02 == 'OOO') {
+                        victory();
+                    } else if (p10 + p11 + p12 == 'XXX' || p10 + p11 + p12 == 'OOO') {
+                        victory();
+                    } else if (p20 + p21 + p22 == 'XXX' || p20 + p21 + p22 == 'OOO') {
+                        victory();
+                    } else if (p00 + p10 + p20 == 'XXX' || p00 + p10 + p20 == 'OOO') {
+                        victory();
+                    } else if (p01 + p11 + p21 == 'XXX' || p01 + p11 + p21 == 'OOO') {
+                        victory();
+                    } else if (p02 + p12 + p22 == 'XXX' || p02 + p12 + p22 == 'OOO') {
+                        victory();
+                    } else if (p02 + p11 + p20 == 'XXX' || p02 + p11 + p20 == 'OOO') {
+                        victory();
+                    } else if (p00 + p11 + p22 == 'XXX' || p00 + p11 + p22 == 'OOO') {
+                        victory();
+                    }
+                }
+
+                function victory() {
+                    alert('(' + letra + ') venceu parabéns!!!');
+                    comecar();
+                }
+
+                function getValue() {
+                    p00 = document.getElementById('p1').innerHTML;
+                    p01 = document.getElementById('p2').innerHTML;
+                    p02 = document.getElementById('p3').innerHTML;
+                    p10 = document.getElementById('p4').innerHTML;
+                    p11 = document.getElementById('p5').innerHTML;
+                    p12 = document.getElementById('p6').innerHTML;
+                    p20 = document.getElementById('p7').innerHTML;
+                    p21 = document.getElementById('p8').innerHTML;
+                    p22 = document.getElementById('p9').innerHTML;
+                }
+
+
 
                 function comecar() {
                     location.reload();
