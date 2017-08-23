@@ -1,0 +1,39 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+
+.radio-text{
+    font-size: 25px;
+    font-stretch: expanded;
+    color: black;
+}
+
+
+th{
+    height: 150px;
+    width: 150px;
+    border: solid 3px #23527c;
+}
+
+td{
+    height: 150px;
+    width: 150px;
+    border: solid 3px #23527c;
+}
+
+.font-monster{
+    font-size: 72px;
+    font-stretch: expanded;
+}
+
+.input {
+    z-index: 3;
+    width: 26px;
+    height: 26px;-moz-appearance: none;
+}
+
+
+
