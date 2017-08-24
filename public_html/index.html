@@ -31,7 +31,7 @@
                 <p>Quem começa Jogando ?</p>
                 <form action="">
                     <label for="rbx" class="label radio-text">X</label>
-                    <input id="rbx" onclick="changeValue()" name="teste" class="radio-inline input" type="radio" checked/>
+                    <input id="rbx" onclick="changeValue()" name="teste" class="radio-inline input" type="radio"/>
                     <label for="rbo" class="label radio-text">O</label>
                     <input id="rbo" onclick="changeValue()" name="teste" class="radio-inline input" type="radio"/>
                     <input id="btComecar" onclick="comecar();" class="btn-lg btn-primary" type="button" value="Começar">
@@ -40,6 +40,7 @@
         </div>
 
         <div class="container center-block">
+            <h2 id="vencedor"></h2>
             <table>
                 <tbody>
                     <tr>
@@ -72,26 +73,45 @@
                 var p22 = "";
 
                 var letra = "";
+                var init, invert;
 
+                if (sessionStorage.checked == undefined) {
+                    init = true;
+                } else {
+                    init = sessionStorage.checked;
+                }
 
+                
+
+                if (init == 'true') {
+                    init = true;
+                    document.getElementById('rbx').checked = true;
+                } else {
+                    init = false;
+                    document.getElementById('rbo').checked = true;
+                }
+                
+                invert = init;
+                
                 function stop() { }
 
-                var init = document.getElementById('rbx').checked;
                 function changeValue() {
+                    invert = !init;
+                    sessionStorage.checked = invert;
                     location.reload();
                 }
 
                 function teste(p) {
-                    if (init) {
+                    if (invert) {
                         document.getElementById(p).innerHTML = "X";
                         letra = "X";
                         document.getElementById(p).onclick = stop();
-                        init = !init;
+                        invert = !invert;
                     } else {
                         document.getElementById(p).innerHTML = "O";
                         letra = "O";
                         document.getElementById(p).onclick = stop();
-                        init = !init;
+                        invert = !invert;
                     }
                     getValue();
                     validaPosition();
@@ -118,8 +138,7 @@
                 }
 
                 function victory() {
-                    alert('(' + letra + ') venceu parabéns!!!');
-                    comecar();
+                    document.getElementById('vencedor').innerHTML = '(' + letra + ') Venceu Parabéns!!!';
                 }
 
                 function getValue() {
@@ -133,8 +152,6 @@
                     p21 = document.getElementById('p8').innerHTML;
                     p22 = document.getElementById('p9').innerHTML;
                 }
-
-
 
                 function comecar() {
                     location.reload();
@@ -151,23 +168,5 @@
         <script src="js/vendor/bootstrap.min.js"></script>
 
         <script src="js/main.js"></script>
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-                (function (b, o, i, l, e, r) {
-                    b.GoogleAnalyticsObject = l;
-                    b[l] || (b[l] =
-                            function () {
-                                (b[l].q = b[l].q || []).push(arguments)
-                            });
-                    b[l].l = +new Date;
-                    e = o.createElement(i);
-                    r = o.getElementsByTagName(i)[0];
-                    e.src = '//www.google-analytics.com/analytics.js';
-                    r.parentNode.insertBefore(e, r)
-                }(window, document, 'script', 'ga'));
-                ga('create', 'UA-XXXXX-X', 'auto');
-                ga('send', 'pageview');
-        </script>
     </body>
 </html>
